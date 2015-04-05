@@ -8,11 +8,46 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate, UIWebViewDelegate {
+    @IBOutlet weak var urlTextField: UITextField!
+    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        urlTextField.resignFirstResponder()
+        
+        loadURL(urlTextField.text, webView: webView)
+        
+        return true
+    }
+    
+    // load website
+    func loadURL(url: String, webView: UIWebView) {
+        var nsUrl = NSURL(string: ("http://" + url))
+        
+        var nsReq = NSURLRequest(URL: nsUrl!)
+        
+        webView.loadRequest(nsReq)
+        
+    }
+    
+    // start loading
+    func webViewDidStartLoad(webView: UIWebView) {
+        loadingActivityIndicator.startAnimating()
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+    }
+    
+    // finish loading
+    func webViewDidFinishLoad(webView: UIWebView) {
+        loadingActivityIndicator.stopAnimating()
+        
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }
 
     override func didReceiveMemoryWarning() {

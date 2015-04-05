@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D130a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WebBrowser" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,8 +16,56 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Input URL" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="iEz-54-2E9">
+                                <rect key="frame" x="198" y="28" width="151" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="x74-fV-893"/>
+                                </connections>
+                            </textField>
+                            <webView contentMode="scaleToFill" misplaced="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D1u-fr-oC9">
+                                <rect key="frame" x="198" y="200" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="VXn-lW-tve"/>
+                                </connections>
+                            </webView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9Br-8E-9HO">
+                                <rect key="frame" x="308" y="221" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="iEz-54-2E9" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Iec-Sx-fxb"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iEz-54-2E9" secondAttribute="trailing" id="Qwd-oS-dug"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="D1u-fr-oC9" secondAttribute="bottom" id="TjW-Vm-jyg"/>
+                            <constraint firstItem="D1u-fr-oC9" firstAttribute="top" secondItem="iEz-54-2E9" secondAttribute="bottom" constant="30" id="Xkh-a7-mQe"/>
+                            <constraint firstItem="iEz-54-2E9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="bDO-S3-fCV"/>
+                            <constraint firstItem="iEz-54-2E9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="dwQ-h5-PR1"/>
+                            <constraint firstItem="D1u-fr-oC9" firstAttribute="top" secondItem="iEz-54-2E9" secondAttribute="bottom" id="hyf-MI-a37"/>
+                            <constraint firstItem="D1u-fr-oC9" firstAttribute="top" secondItem="iEz-54-2E9" secondAttribute="bottom" constant="30" id="jgk-W9-sZM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="iEz-54-2E9" secondAttribute="trailing" id="mUA-3M-LFB"/>
+                            <constraint firstItem="D1u-fr-oC9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="oKW-dm-yCt"/>
+                            <constraint firstAttribute="centerX" secondItem="9Br-8E-9HO" secondAttribute="centerX" id="qY2-jw-71a"/>
+                            <constraint firstAttribute="centerY" secondItem="9Br-8E-9HO" secondAttribute="centerY" id="wbk-4R-09a"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="D1u-fr-oC9" secondAttribute="trailing" id="zqn-4Q-Ve4"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Qwd-oS-dug"/>
+                                <exclude reference="dwQ-h5-PR1"/>
+                                <exclude reference="Xkh-a7-mQe"/>
+                                <exclude reference="jgk-W9-sZM"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="loadingActivityIndicator" destination="9Br-8E-9HO" id="xuy-7v-sJA"/>
+                        <outlet property="urlTextField" destination="iEz-54-2E9" id="td3-BY-fqc"/>
+                        <outlet property="webView" destination="D1u-fr-oC9" id="twJ-b1-wew"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
